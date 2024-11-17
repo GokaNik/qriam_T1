@@ -86,12 +86,3 @@ def get_history(entity_id, sprint, arr_s, arr_h, arr_d, ):  # Получает �
 
     return task
 
-# def delta_time(entity_id,sprint,arr_s,arr_h,arr_d,row):
-#     if row.values[1] == "Статус":
-#         task["status_in_sprint"] = row.values[-3].split("->")[1][1:]
-#         if row.values[-3].split("->")[0][:-1] == "created":
-
-
-# hist=(get_history(4449728, 'Спринт 2024.3.1.NPP Shared Sprint', arr_s, arr_h, arr_d))
-# print(hist)
-# print((hist['time_stop']-hist['time_start']).total_seconds())

@@ -13,7 +13,7 @@ def graphics():
     def ok_clicked():
         selected_value = combo.get()
         data.append(selected_value)
-        print(data)
+
 
     
     def select_file():

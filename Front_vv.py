@@ -8,9 +8,9 @@ def front_v(data_bar, choice, summury):
     root.title("Qriam")
     root.geometry("1920x1080")
 
-    
+        
 
-    def print_sprint(data_bar, choice,que, right):
+    def print_sprint(data_bar, choice,que, right, summery):
         data_bar.pop("backlog_change")
         sp = list(data_bar.values())
         for k,v in data_bar.items():
@@ -64,29 +64,72 @@ def front_v(data_bar, choice, summury):
             x_l2, y_l2 = x_l + 10, y_l + 10
 
             color = colors[rectangle[0]]
-            print(color, x_l, y_l, x_l2, y_l2)
+
             canvas.create_rectangle(x_l +20,y_l, x_l2 +20, y_l2, fill=color, outline="")
             canvas.create_text(x_l2+20, y_l2+10, text=category, font=("Arial", 9))
 
             per_x += 120
             c+=1
-        health = f'Задач "К выполнению" от общего объема: {sp[0]}\n\nЗадач "Снято" от общего объема: {sp[1]}\n\nИзменение бэклога: {sp[2]}'
+        health = f'Задач "К выполнению" от общего объема: {summery["for_exect"]}\n\nЗадач "Снято" от общего объема: {summery["removed"]}\n\nИзменение бэклога: {summery["backlog_change"]}'
         label = tk.Label(root, text=health, font=("Arial", 10), justify="left", anchor="w")
         label.grid(row=que+1,column= right)
         
         root.update()
 
     def grap():
-        target_key = 'for_exect'
-        values_for_print = [d[target_key] for d in data_bar]
-        plt.plot(values_for_print)
-        plt.xlabel('Словари')
-        plt.ylabel('Значения')
-        plt.title(f'График значений по ключу "{target_key}"')
-        plt.show() 
+        pass
 
-    print(data_bar)
+
+
+
     #ГРАФИКИ
+    target_key = 'for_exect'
+    values_for_print = [d[target_key] for d in data_bar]
+    fig = Figure(figsize=(5, 4), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.plot(values_for_print)
+    ax.set_title(f'График значений по ключу "{target_key}"')
+    ax.set_xlabel('Спринты начиная с 0')
+    ax.set_ylabel('Значение')
+    canvas1 = FigureCanvasTkAgg(fig, master=root)
+    canvas1.draw()
+    canvas1.get_tk_widget().place(relx=1.0, rely=0.0, anchor="ne")
+
+    target_key = 'done'
+    values_for_print = [d[target_key] for d in data_bar]
+    fig = Figure(figsize=(5, 4), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.plot(values_for_print)
+    ax.set_title(f'График значений по ключу "{target_key}"')
+    ax.set_xlabel('Спринты начиная с 0')
+    ax.set_ylabel('Значение')
+    canvas1 = FigureCanvasTkAgg(fig, master=root)
+    canvas1.draw()
+    canvas1.get_tk_widget().place(relx=0.7, rely=0.0, anchor="ne")
+
+    target_key = 'in_work'
+    values_for_print = [d[target_key] for d in data_bar]
+    fig = Figure(figsize=(5, 4), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.plot(values_for_print)
+    ax.set_title(f'График значений по ключу "{target_key}"')
+    ax.set_xlabel('Спринты начиная с 0')
+    ax.set_ylabel('Значение')
+    canvas1 = FigureCanvasTkAgg(fig, master=root)
+    canvas1.draw()
+    canvas1.get_tk_widget().place(relx=0.7, rely=0.45, anchor="ne")
+
+    target_key = 'removed'
+    values_for_print = [d[target_key] for d in data_bar]
+    fig = Figure(figsize=(5, 4), dpi=100)
+    ax = fig.add_subplot(111)
+    ax.plot(values_for_print)
+    ax.set_title(f'График значений по ключу "{target_key}"')
+    ax.set_xlabel('Спринты начиная с 0')
+    ax.set_ylabel('Значение')
+    canvas1 = FigureCanvasTkAgg(fig, master=root)
+    canvas1.draw()
+    canvas1.get_tk_widget().place(relx=1.0, rely=0.45, anchor="ne")
     
     
 
@@ -99,25 +142,14 @@ def front_v(data_bar, choice, summury):
     for x in data_bar:
         if iters == 3:
             break
-        print_sprint(x, choice, q, right)
+        print_sprint(x, choice, q, right, summury[iters])
         q +=2
         if q > 100:
             right += 1
             q = 0
         iters += 1
-    
-    
-    fig = Figure(figsize=(5, 4), dpi=100)
-    ax = fig.add_subplot(111)
-    ax.plot(values)
-    ax.set_title(f'График значений по ключу "{target_key}"')
-    ax.set_xlabel('Словарь')
-    ax.set_ylabel('Значение')
 
-    button1 = tk.Button(root, text="MAIN", command=grap)
-    button1.grid(row=0, column=1)
 
-    ax.plot(x_values, y_values)
 
     choice = "Sprint 1"
     label = tk.Label(root, text=choice, font=("Arial", 14))
@@ -129,8 +161,9 @@ def front_v(data_bar, choice, summury):
 
 
 
-    data_bar = ["124", '178', "123"]
     
+    
+
 
 
     root.mainloop()
