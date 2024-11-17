@@ -69,29 +69,29 @@ def rates(sprint, arr_s,area, arr_h, arr_d):
 
 
 def comp_sp(sprint, arr_s,area, arr_h, arr_d):
-    summary={'for_exect': 0,
-             'removed': 0,
-             'backlog_change': 0
+    summary={'for_exect': '',
+             'removed': '',
+             'backlog_change': ''
              }
     rate=rates(sprint, arr_s,area, arr_h, arr_d)
     if rate['for_exect']>20:
-        summary['for_exect']=0
+        summary['for_exect']='Плохо'
     elif 15<rate['for_exect']<=20:
-        summary['for_exect']=1
+        summary['for_exect']='Средне'
     else:
-        summary['for_exect']=2
+        summary['for_exect']='Хорошо'
     if rate['removed']>10:
-        summary['removed']=0
+        summary['removed']='Плохо'
     elif 7<rate['removed']<=10:
 
-        summary['removed']=1
+        summary['removed']='Средне'
     else:
-        summary['removed']=2
+        summary['removed']='Хорошо'
     if rate['backlog_change']>20:
-        summary['backlog_change']=0
+        summary['backlog_change']='Плохо'
     elif 15<rate['backlog_change']<=20:
-        summary['backlog_change']=1
+        summary['backlog_change']='Средне'
     else:
-        summary['backlog_change']=2
+        summary['backlog_change']='Хорошо'
 
     return summary
